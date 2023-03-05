@@ -12,7 +12,7 @@ app.use(express.json());
 //Configurar o handlebars
 // Template engine
 layoutsDir: __dirname + '/views/layouts',
-//Abaixo foi dada permissão de acesso ao handlebars para visualizar dados do banco de daddos
+    //Abaixo foi dada permissão de acesso ao handlebars para visualizar dados do banco de daddos
 
     app.engine('handlebars', handlebars.engine({
         defaultLayout: 'main',
@@ -28,11 +28,30 @@ app.get("/formulario", function (req, res) {
 
 app.get("/editar", function (req, res) {
     res.render('layouts/editar');
+
+
+
 });
 
+app.post("/atualizar", function (req, res) {
+id=  req.body.id;
+//res.send("valor: " + req.body.id+ req.body.titulo+ req.body.conteudo);
 
+const idPost = req.body.id;
+     postagem.update({
 
+         titulo: req.body.titulo,
+         conteudo: req.body.conteudo
+        
+        
+        } , {where : {id :1}}).then(function (){
+            res.send('Atualizado com sucesso');
+        }).catch(function (erro){
+            res.send('Arquivo não atualizado, ' + erro);
+        });
+  
 
+});
 
 app.get("/listar", function (req, res) {
     postagem.allowMethods
