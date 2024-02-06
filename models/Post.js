@@ -8,7 +8,8 @@ const Post = db.sequelize.define('postagens',
         type:  db.Sequelize.TEXT
     }
 });
-// Post.sync({force : true});
+ //Post.sync({force : true}); nesse modelo ao reiniciar o servidor ele apaga e recria a tabela
+ Post.sync({})// nesse modelo ele so cria a tabela a primeira vez.
 module.exports = Post;
 //Executar esse comando uma vez
 
